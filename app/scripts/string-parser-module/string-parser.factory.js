@@ -84,6 +84,15 @@ angular.module("stringParserModule")
     // Otherwise, just return the boolean result directly
     return result;
   };
+  StringParser.prototype.extractNumbers = function extractNumbers() {
+    var numbers = [];
+    this.strArray.forEach(function(word) {
+      if (!isNaN(word)) {
+        numbers.push(parseInt(word, 10));
+      }
+    });
+    return numbers;
+  };
   StringParser.prototype.prefix = function prefix() {
     return new StringParser(this.strArray.slice(0, this.index));
   };
