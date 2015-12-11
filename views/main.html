@@ -1,0 +1,10 @@
+<div class="main-container">
+  <div class="display-line" ng-repeat="h in history track by $index">
+    <p
+    class="history"
+    ng-click="$event.stopPropagation()">{{h}}</p>
+  </div>
+  <div class="display-line">
+    <user-input></user-input>
+  </div>
+</div>
