@@ -28,6 +28,13 @@ module.exports = function (grunt) {
   // Define the configuration for all the tasks
   grunt.initConfig({
 
+    'gh-pages': {
+      options: {
+        base: 'dist'
+      },
+      src: ['**']
+    },
+
     // Project settings
     yeoman: appConfig,
 
@@ -259,7 +266,7 @@ module.exports = function (grunt) {
         flow: {
           html: {
             steps: {
-              js: ['concat', 'uglifyjs'],
+              js: ['concat'],
               css: ['cssmin']
             },
             post: {}
@@ -360,6 +367,18 @@ module.exports = function (grunt) {
           cwd: 'bower_components/bootstrap/dist',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.app %>/scripts/',
+          src: [
+            '**/*.html'
+          ],
+          dest: '<%= yeoman.dist %>/scripts'
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.app %>/views/',
+          src: '*.html',
+          dest: 'dist/views'
         }]
       },
       styles: {
@@ -379,7 +398,7 @@ module.exports = function (grunt) {
         'compass'
       ],
       dist: [
-        'newer:jshint',
+        // 'newer:jshint',
         'compass:dist'
       ]
     },
@@ -435,7 +454,7 @@ module.exports = function (grunt) {
     'copy:dist',
     'cdnify',
     'cssmin',
-    'uglify',
+    // 'uglify',
     'filerev',
     'usemin',
     'htmlmin'
