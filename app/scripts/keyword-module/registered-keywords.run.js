@@ -4,7 +4,7 @@ angular.module("keywordModule")
 .run(function(displayService, keywordService, stringParserFactory) {
 
   keywordService.registerKeyword(
-    ["hello","hi","sup"],
+    ["hello"],
     "Nice pleasantries",
     function(entirePhrase) {
 
@@ -47,6 +47,66 @@ angular.module("keywordModule")
       if (sp.size() === 1) {
         displayService.clearHistory();
       }
+    }
+  );
+
+
+  keywordService.registerKeyword(
+    "set tempo",
+    "Set the playback tempo, in BPS (beats per second)",
+    function(phrase) {
+
+      var sp = stringParserFactory.create(phrase, "tempo");
+      var numbers = sp.suffix().extractNumbers();
+      var tempo = 1; //default tempo
+      if (numbers.length > 0) {
+        tempo = numbers[0];
+      }
+
+      var response = [
+        "Enter the following into the Supercollider server:\n",
+        "\tq.setTempo(" + tempo + ")"
+      ].join("");
+      displayService.print(response);
+    }
+  );
+
+
+  keywordService.registerKeyword(
+    "play",
+    "Resume playback, if playback is paused",
+    function(phrase) {
+      var response = [
+        "Enter the following into the Supercollider server:\n",
+        "\tq.playAll()"
+      ].join("");
+      displayService.print(response);
+    }
+  );
+
+
+  keywordService.registerKeyword(
+    "pause",
+    "Pause all playback",
+    function(phrase) {
+      var response = [
+        "Enter the following into the Supercollider server:\n",
+        "\tq.pauseAll()"
+      ].join("");
+      displayService.print(response);
+    }
+  );
+
+
+  keywordService.registerKeyword(
+    "reset",
+    "Stop and remove all added sounds",
+    function(phrase) {
+      var response = [
+        "Enter the following into the Supercollider server:\n",
+        "\tq.clear()"
+      ].join("");
+      displayService.print(response);
     }
   );
 
