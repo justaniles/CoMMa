@@ -22,7 +22,7 @@ angular.module("commaApp", [
   displayService.print([
     "Hello! My name is CoMMa (aka Conversational Music Maker). ",
     "You can ask me to create music or sounds using natural language! \n",
-    "Type 'help' to see a list of all valid commands."
+    "Type 'help' to see a list of all valid keywords."
   ].join(""));
 });
 
