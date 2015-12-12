@@ -261,9 +261,9 @@ angular.module("keywordModule")
 .run(function(displayService, keywordService, stringParserFactory) {
 
   keywordService.registerKeyword(
-    ["hello"],
-    "Nice pleasantries",
-    function(entirePhrase) {
+    ["hello"], // keyword
+    "Nice pleasantries", // description
+    function(entirePhrase) { // function called when keyword detected
 
     // Print random greeting:
     var greetings = [
@@ -473,8 +473,8 @@ angular.module("stringParserModule")
     if (typeof val === "string") {
       val = this.strArray.indexOf(val);
     }
-    if (typeof val !== "number") {
-      console.error("ERROR typeof val must either be a string or number");
+    if (typeof val !== "number" || val === -1) {
+      console.error("ERROR invalid index value: ", val);
       return;
     }
     this.index = val;
